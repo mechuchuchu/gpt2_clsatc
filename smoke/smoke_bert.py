@@ -25,7 +25,7 @@ SEED = 42
 
 MODEL_NAME = "distilbert-base-uncased"
 
-BATCH_SIZE = 16
+BATCH_SIZE = 64
 EPOCHS = 3
 
 # 동일 조건 비교를 위해 동일한 learning rate 사용
