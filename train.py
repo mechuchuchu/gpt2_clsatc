@@ -62,6 +62,9 @@ def parse_args():
     p.add_argument("--hf_dataset", default="HuggingFaceFW/fineweb-edu")
     p.add_argument("--hf_subset", default="sample-10BT")
     p.add_argument("--num_workers", type=int, default=2)
+    p.add_argument("--no_data_shuffle", action="store_true",
+                   help="큰 bin(수십 GB 이상)에서 random access IO/permutation 메모리를 피하고 "
+                        "순차 읽기로 전환. FineWeb sample 자체가 랜덤 샘플이라 무방함")
 
     # ---- optimization
     p.add_argument("--max_tokens", type=float, default=2e9)
@@ -324,7 +327,8 @@ def main():
 
     # ---- data
     if args.data_mode == "bin":
-        train_ds = MemmapBlockDataset(args.train_bin, args.block_size, seed=args.seed, shuffle=True)
+        train_ds = MemmapBlockDataset(args.train_bin, args.block_size, seed=args.seed,
+                                      shuffle=not args.no_data_shuffle)
         val_ds = MemmapBlockDataset(args.val_bin, args.block_size, seed=args.seed, shuffle=False)
         if start_step > 0:
             train_ds.rotate(tokens_seen // args.block_size)
