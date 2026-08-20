@@ -61,7 +61,7 @@ set_seed(SEED)
 # 2. Load IMDb
 # ============================================================
 
-dataset = load_dataset("imdb")
+dataset = load_dataset("stanfordnlp/imdb")
 
 print(dataset)
 print(dataset["train"][0])
