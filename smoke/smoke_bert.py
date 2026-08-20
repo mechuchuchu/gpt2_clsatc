@@ -32,7 +32,7 @@ EPOCHS = 3
 LR = 2e-5
 WEIGHT_DECAY = 0.01
 
-MAX_LENGTH = 256
+MAX_LENGTH = 512
 
 DEVICE = torch.device(
     "cuda" if torch.cuda.is_available() else "cpu"
